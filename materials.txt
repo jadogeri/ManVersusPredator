@@ -1,0 +1,123 @@
+interface LoginData {
+  email: string;
+  password: string;
+}
+
+export interface UserData {
+  id: string;
+  email: string;
+  profilePicture: string;
+}
+
+export type LoginAction =
+  | { type: 'LOGIN_REQUEST'; input: LoginData }
+  | { type: 'LOGIN_SUCCESS'; user: UserData }
+  | { type: 'LOGIN_FAILED'; error: string };
+
+// action creators
+export function loginRequest(input: LoginData): LoginAction {
+  return { type: 'LOGIN_REQUEST', input };
+}
+
+export function loginSuccess(user: UserData): LoginAction {
+  return { type: 'LOGIN_SUCCESS', user };
+}
+
+export function loginFailed(error: string): LoginAction {
+  return { type: 'LOGIN_FAILED', error };
+}
+view rawactions.ts hosted with ❤ by GitHub
+import { LoginAction, UserData } from './actions';
+
+interface LoginState {
+  user: UserData;
+  isLoading: boolean;
+  error: string;
+}
+
+const initialState: LoginState = {
+  user: null,
+  error: null,
+  isLoading: false
+}
+
+export function loginReducer(state = initialState, action: LoginAction): LoginState {
+  switch (action.type) {
+    case 'LOGIN_REQUEST': 
+      return {...state, isLoading: true}
+    case 'LOGIN_SUCCESS':
+      return {...state, isLoading: false, user: action.user}
+    case 'LOGIN_FAILED':
+      return {...state, isLoading: false, error: action.error}
+    default:
+      return state;
+  }
+}
+
+--///////////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////////
+
+// An enum with all the types of actions to use in our reducer
+enum CountActionKind {
+  INCREASE = 'INCREASE',
+  DECREASE = 'DECREASE',
+}
+
+// An interface for our actions
+interface CountAction {
+  type: CountActionKind;
+  payload: number;
+}
+
+// An interface for our state
+interface CountState {
+  count: number;
+}
+
+// Our reducer function that uses a switch statement to handle our actions
+function counterReducer(state: CountState, action: CountAction) {
+  const { type, payload } = action;
+  switch (type) {
+    case CountActionKind.INCREASE:
+      return {
+        ...state,
+        value: state.count + payload,
+      };
+    case CountActionKind.DECREASE:
+      return {
+        ...state,
+        value: state.count - payload,
+      };
+    default:
+      return state;
+  }
+}
+
+// An example of using the `useReducer` hooks with our reducer function and an initial state
+const Counter: FunctionComponent = () => {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+  return (
+    <div>
+      Count: {state.count}
+      {/* Calling our actions on button click */}
+      <button
+        onClick={() => dispatch({ type: CountActionKind.INCREASE, payload: 5 })}
+      >
+        -
+      </button>
+      <button onClick={() => dispatch({ type: CountActionKind.DECREASE, payload: 5 })}>+</button>
+    </div>
+  );
+};
+
+--///////////////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////////////
+--///////////////////////////////////////////////////////////////////////
+
+
+default
+import { useNavigation, ParamListBase,  NavigationProp } from '@react-navigation/native';
+const navigation: NavigationProp<ParamListBase> = useNavigation();
+
+
