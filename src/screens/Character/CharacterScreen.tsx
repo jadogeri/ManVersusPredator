@@ -47,16 +47,16 @@ const CharacterScreen = () => {
                                                  
                     <AttributeDetail title="health" imageSource={require('../../../assets/icons/fighterHealth.png')} />
 
-                    <GuageButton attribute="health"  value={state.health} increase={() =>{dispatch({type : "health",amount:INCREMENT});}}
-                                                                  decrease={() =>{dispatch({type : "health",amount:-1*INCREMENT});}} />
+                    <GuageButton attribute="health"  value={state.health} increase={() =>{dispatch({type : "HEALTH",amount:INCREMENT});}}
+                                                                  decrease={() =>{dispatch({type : "HEALTH",amount:-1*INCREMENT});}} />
                     <AttributeDetail title="strength" imageSource={require('../../../assets/icons/strength.jpg')} />
 
-                    <GuageButton attribute="strength" value={state.strength} increase={() =>{dispatch({type : "strength",amount:INCREMENT});}}
-                                                                  decrease={() =>{dispatch({type : "strength",amount:-1*INCREMENT});}} />                   
+                    <GuageButton attribute="strength" value={state.strength} increase={() =>{dispatch({type : "STRENGTH",amount:INCREMENT});}}
+                                                                  decrease={() =>{dispatch({type : "STRENGTH",amount:-1*INCREMENT});}} />                   
                     <AttributeDetail title="specialability" imageSource={require('../../../assets/icons/specialAbility.png')} />
 
-                    <GuageButton attribute="special ability"  value={state.special} increase={() =>{dispatch({type : "special",amount:INCREMENT});}}
-                                                                  decrease={() =>{dispatch({type : "special",amount:-1*INCREMENT});}} />
+                    <GuageButton attribute="special ability"  value={state.special} increase={() =>{dispatch({type : "SPECIAL",amount:INCREMENT});}}
+                                                                  decrease={() =>{dispatch({type : "SPECIAL",amount:-1*INCREMENT});}} />
 
                    <View style={{flex:0.05}}>
                     <Button style={styles.button} title = {state.totalPoints === 0 ? "BEGIN GAME":"USE ALL POINTS"}
