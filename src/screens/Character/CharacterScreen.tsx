@@ -3,12 +3,13 @@ import {View, Text, StyleSheet, ScrollView,Button } from "react-native";
 import GuageButton from "../../components/GuageButton";
 import AttributeDetail from "../../components/AttributeDetail";
 import PlayerPointStatus from "../../components/PlayerPointStatus";
-import { INCREMENT, STATUS_POWER, STATUS_ZERO } from "@/src/constants/characterScreenConstants";
+import { INCREMENT,DECREMENT, STATUS_POWER, STATUS_ZERO } from "@/src/constants/characterScreenConstants";
 import { Character } from "@/src/types/Chanacter";
 import { RouteProp, useRoute, useNavigation } from "@react-navigation/native";
 import { MainFlowStackParamList } from "@/src/routes/navigation";
 import { StackNavigationProp } from "@react-navigation/stack";
-import reducer from "../../reducers/characterReducer"
+import attributeReducer from "../../reducers/attributeReducer"
+import { updateHealth, updateSpecial, updateStrength } from "@/src/actions/attributeActions";
 
 
 type characterScreenRouteTypes = RouteProp<MainFlowStackParamList,"Character">;
@@ -34,7 +35,7 @@ const CharacterScreen = () => {
 
 
     
-    const [state,dispatch] = useReducer(reducer,player)
+    const [state,dispatch] = useReducer(attributeReducer,player)
     console.log(state);
 
     return <View style={styles.background}>
@@ -47,19 +48,19 @@ const CharacterScreen = () => {
                                                  
                     <AttributeDetail title="health" imageSource={require('../../../assets/icons/fighterHealth.png')} />
 
-                    <GuageButton attribute="health"  value={state.health} increase={() =>{dispatch({type : "HEALTH",amount:INCREMENT});}}
-                                                                  decrease={() =>{dispatch({type : "HEALTH",amount:-1*INCREMENT});}} />
+                    <GuageButton attribute="health"  value={state.health} increase={() =>{dispatch(updateHealth(INCREMENT));}}
+                                                                  decrease={() =>{() =>{dispatch(updateHealth(DECREMENT));}}} />
                     <AttributeDetail title="strength" imageSource={require('../../../assets/icons/strength.jpg')} />
 
-                    <GuageButton attribute="strength" value={state.strength} increase={() =>{dispatch({type : "STRENGTH",amount:INCREMENT});}}
-                                                                  decrease={() =>{dispatch({type : "STRENGTH",amount:-1*INCREMENT});}} />                   
+                    <GuageButton attribute="strength" value={state.strength} increase={() =>{dispatch(updateStrength(INCREMENT));}}
+                                                                  decrease={() =>{dispatch(updateStrength(DECREMENT));}} />                   
                     <AttributeDetail title="specialability" imageSource={require('../../../assets/icons/specialAbility.png')} />
 
-                    <GuageButton attribute="special ability"  value={state.special} increase={() =>{dispatch({type : "SPECIAL",amount:INCREMENT});}}
-                                                                  decrease={() =>{dispatch({type : "SPECIAL",amount:-1*INCREMENT});}} />
+                    <GuageButton attribute="special ability"  value={state.special} increase={() =>{dispatch(updateSpecial(INCREMENT));}}
+                                                                  decrease={() =>{dispatch(updateSpecial(DECREMENT));}} />
 
                    <View style={{flex:0.05}}>
-                    <Button style={styles.button} title = {state.totalPoints === 0 ? "BEGIN GAME":"USE ALL POINTS"}
+                    <Button  title = {state.totalPoints === 0 ? "BEGIN GAME":"USE ALL POINTS"}
                                     onPress = {state.totalPoints === 0 ? () => {navigation.navigate("Stage",state)} : ()=>{} }/>
                                    
                     </View>
