@@ -8,8 +8,7 @@ import { MainFlowStackParamList } from "@/src/routes/navigation";
 import {battleReducer} from "../../reducers/battleReducer"
 import {gameOverPrompt} from "../../utils/gameOverPrompt"
 import {buttonPressed} from "../../constants/buttonPressed"
-import { styles } from "./StageStyles"
-
+import { styles } from "./StageStyles";
 
 //type characterScreenRouteTypesa = RouteProp<MainFlowStackParamList,"Character">;
 
