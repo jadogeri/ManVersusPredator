@@ -1,27 +1,11 @@
-import IContestant from "../interfaces/IContestant";
+import Contestant from "./Contestant";
 
-class Fighter implements IContestant {
-    prompt?: string | undefined;
-    health: number = 0;
-    special: number = 0;
-    strength: number = 0;
-    name: string = "Arnold";
-    level?: number | undefined;
+class Fighter extends Contestant { 
 
-    public Figher(health : number, special : number,strength : number , name : string, level : number, prompt : string ){
-        this.health = health;
-        this.special = special;
-        this.strength = strength;
-        this.name = name;
-        this.level = level;
-        this.prompt = prompt;
+    public constructor(health : number, special : number,strength : number , name : string, level : number, prompt : string ){
+    super(health , special ,strength , name, level , prompt); 
 
     }
-
-    
-   
-
-
 }
 
 export default Fighter;

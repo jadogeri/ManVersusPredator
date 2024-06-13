@@ -9,6 +9,8 @@ import {battleReducer} from "../../reducers/battleReducer"
 import {gameOverPrompt} from "../../utils/gameOverPrompt"
 import {buttonPressed} from "../../constants/buttonPressed"
 import { styles } from "./StageStyles";
+import Fighter from "@/src/models/Fighter";
+import Monster3 from "@/src/models/Monster";                                                                                        2       
 
 //type characterScreenRouteTypesa = RouteProp<MainFlowStackParamList,"Character">;
 
